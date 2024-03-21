@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { XmlReaderService } from './core/xml-reader.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'not-new-mmb';
+  sessionData$: Observable<Array<any>>; 
+  
+
+  constructor(public xmlReader: XmlReaderService) {}
+
+  ngOnInit(): void {
+    this.sessionData$ =  this.xmlReader.getSessionData();
+  }
 }
